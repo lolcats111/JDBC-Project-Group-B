@@ -2,7 +2,7 @@
 ## GIT How-To Guide
 ### Cloning a copy of the repo
 
-1. Install Git on to your device: [](https://github.com/git-guides/install-git)
+1. Install Git on to your device: [Link](https://github.com/git-guides/install-git)
 2. Clone the repo on to your device with the following command. Authorize yourself if prompted.
 ```
 git clone https://github.com/lolcats111/JDBC-Project-Group-B.git
