@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-17T00:46:01.557Z" agent="5.0 (Macintosh; Intel Mac OS X 11_0_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36" etag="qqGL4GJdctTqPjJkgva4" version="13.9.9" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-17T03:17:16.522Z" agent="5.0 (Macintosh; Intel Mac OS X 11_0_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36" etag="AThor7Fs9QxDqlhL26l7" version="13.9.9" type="github">
   <diagram id="9V43UQf9ATpL4nqVWi98" name="Page-1">
-    <mxGraphModel dx="742" dy="635" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="704" dy="783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -135,18 +135,18 @@
         <mxCell id="8pvSKaztsbaPSzn9CVBH-13" value="Lachlan" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="540" y="110" width="40" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="5f0gZRf1hawvi2LlgI6R-5" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#525252;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="5f0gZRf1hawvi2LlgI6R-1" target="5f0gZRf1hawvi2LlgI6R-4">
+        <mxCell id="5f0gZRf1hawvi2LlgI6R-5" style="edgeStyle=orthogonalEdgeStyle;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#525252;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="5f0gZRf1hawvi2LlgI6R-1" target="5f0gZRf1hawvi2LlgI6R-4" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="150" y="290" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="5f0gZRf1hawvi2LlgI6R-1" value="Clark" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+        <mxCell id="5f0gZRf1hawvi2LlgI6R-1" value="Bank Clerk" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
           <mxGeometry x="100" y="230" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="5f0gZRf1hawvi2LlgI6R-4" value="User&lt;br&gt;Interace" style="rhombus;whiteSpace=wrap;html=1;fontStyle=1" vertex="1" parent="1">
+        <mxCell id="5f0gZRf1hawvi2LlgI6R-4" value="User&lt;br&gt;Interace" style="rhombus;whiteSpace=wrap;html=1;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="160" y="220" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="5f0gZRf1hawvi2LlgI6R-6" value="Java GUI or Webapge" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+        <mxCell id="5f0gZRf1hawvi2LlgI6R-6" value="Java GUI or Webapge" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="125" y="192.5" width="150" height="20" as="geometry" />
         </mxCell>
       </root>
