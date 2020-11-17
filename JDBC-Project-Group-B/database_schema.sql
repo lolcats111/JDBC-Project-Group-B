@@ -20,9 +20,9 @@ CREATE TABLE CUSTOMERS(
 		CHECK (gender in ('M','F','O'))
 );
 
-/* Login Details for Bank "Clarks" */
+/* Login Details for Bank Clerks */
 
-CREATE TABLE CLARKS(
+CREATE TABLE CLERKS(
 	username VARCHAR(30) PRIMARY KEY,
 	password_hash RAW(16)
 );
