@@ -30,7 +30,7 @@ git push -u origin main
 git status
 ```
 
-### Pull
+### Pull - get the latest changes
  * Get the changes in the hosted repo which aren't in your local repo:
  ```
 git pull
