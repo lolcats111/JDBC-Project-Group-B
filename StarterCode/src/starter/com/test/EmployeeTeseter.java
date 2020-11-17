@@ -1,7 +1,7 @@
-package com.test;
+package starter.com.test;
 
-import com.bean.Employee;
-import com.service.EmployeeService;
+import starter.com.bean.Employee;
+import starter.com.service.EmployeeService;
 
 public class EmployeeTeseter {
 	public static void main(String[] args) {

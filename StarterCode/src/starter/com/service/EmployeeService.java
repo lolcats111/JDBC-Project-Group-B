@@ -1,7 +1,7 @@
-package com.service;
+package starter.com.service;
 
-import com.bean.Employee;
-import com.dao.EmployeeDao;
+import starter.com.bean.Employee;
+import starter.com.dao.EmployeeDao;
 
 public class EmployeeService {
 	

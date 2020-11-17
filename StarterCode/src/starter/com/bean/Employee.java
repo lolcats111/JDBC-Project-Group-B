@@ -1,4 +1,4 @@
-package com.bean;
+package starter.com.bean;
 
 public class Employee {
 	long empNo;

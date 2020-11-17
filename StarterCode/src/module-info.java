@@ -1,9 +1,9 @@
 module dao {
-	exports com.bean;
-	exports com.util;
-	exports com.test;
-	exports com.dao;
-	exports com.service;
+	exports starter.com.bean;
+	exports starter.com.util;
+	exports starter.com.test;
+	exports starter.com.dao;
+	exports starter.com.service;
 
 	requires java.sql;
 }
