@@ -55,12 +55,12 @@ public class CustomerService {
     }
 
     // Update customer gender
-    public char updateCustomerGender(int cid, String gender) {
+    public String updateCustomerGender(int cid, String gender) {
         CustomerDao dao = new CustomerDao();
         boolean t = dao.updateCustomerGender(cid, gender);
         if (t) {
             Customer c = viewCustomerDetails(cid);
-            return c.getGender();
+            return ""+c.getGender();
         }
         return null;
     }
