@@ -4,30 +4,25 @@ import java.sql.Date;
 
 public class Transaction {
 
-	private int transactionId;
 	private int accountId;
-	private Date ts;
 	private String type;
 	private double amount;
 	
-	public Transaction(int transactionId, int accountId, String type, double amount) {
+	public Transaction(int accountId, String type, double amount) {
 		super();
-		this.transactionId = transactionId;
 		this.accountId = accountId;
-		long msSinceEpoch = System.currentTimeMillis();
-		this.ts = new Date(msSinceEpoch);
 		this.type = type;
 		this.amount = amount;
 	}
 	
-
-	public int getTransactionId() {
-		return transactionId;
+	public Transaction(int accountId, double amount) {
+		super();
+		this.accountId = accountId;
+		this.type = "REGULAR";
+		this.amount = amount;
 	}
+	
 
-	public void setTransactionId(int transactionId) {
-		this.transactionId = transactionId;
-	}
 
 	public int getAccountId() {
 		return accountId;
@@ -35,14 +30,6 @@ public class Transaction {
 
 	public void setAccountId(int accountId) {
 		this.accountId = accountId;
-	}
-
-	public Date getTs() {
-		return ts;
-	}
-
-	public void setTs(Date ts) {
-		this.ts = ts;
 	}
 
 	public String getType() {

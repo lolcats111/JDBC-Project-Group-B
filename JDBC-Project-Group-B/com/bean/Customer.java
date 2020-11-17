@@ -1,16 +1,14 @@
 package com.bean;
 
 public class Customer {
-	private int id;
 	private String name;
 	private char gender;
 	private String email;
 	private String phone;
 	private String address;
 	
-	public Customer(int id, String name, char gender, String email, String phone, String address) {
+	public Customer(String name, char gender, String email, String phone, String address) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.email = email;
@@ -18,19 +16,12 @@ public class Customer {
 		this.address = address;
 	}
 	
-	public Customer(int id, String name, char gender) {
+	public Customer(String name, char gender) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.gender = gender;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
