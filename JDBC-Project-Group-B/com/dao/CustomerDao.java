@@ -151,6 +151,33 @@ public class CustomerDao {
 
 		return result;
 	}
+	
+	public boolean updateCustomerPrivilege(int customerId, String privilege) {
+
+		boolean result = false;
+
+		try {
+
+			Connection cn = DBUtil.createConnection();
+			PreparedStatement ps = cn.prepareStatement("UPDATE CUSTOMERS SET is_privileged=? WHERE id=?");
+
+			ps.setString(1, privilege);
+			ps.setInt(2, customerId);
+
+			int n = ps.executeUpdate();
+			result = n > 0;
+
+			// Close all the objects in the reverse order of creation
+			DBUtil.closeAllConnection(cn, ps, null);
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+
+		}
+
+		return result;
+	}
 
 	public boolean addCustomer(Customer c) {
 

@@ -6,16 +6,19 @@ public class Customer {
 	private String email;
 	private String phone;
 	private String address;
+	private String isPrivileged;
 	
-	public Customer(String name, char gender, String email, String phone, String address) {
+	public Customer(String name, char gender, String email, String phone, String address, String isPrivileged) {
 		super();
 		this.name = name;
 		this.gender = gender;
 		this.email = email;
 		this.phone = phone;
 		this.address = address;
+		this.isPrivileged = isPrivileged;
 	}
 	
+
 	public Customer(String name, char gender) {
 		super();
 		this.name = name;
@@ -52,7 +55,12 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+	public String getIsPrivileged() {
+		return isPrivileged;
+	}
+	public void setIsPrivileged(String isPrivileged) {
+		this.isPrivileged = isPrivileged;
+	}
 	
 
 }
