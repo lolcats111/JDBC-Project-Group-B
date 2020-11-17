@@ -8,6 +8,8 @@ import java.sql.SQLException;
 
 public class DBUtil {
 	
+	static String url = "jdbc:oracle:thin:system/TCSoracle@//localhost:1521/XE";
+	
 	public static Connection createConnection() {
 		
 		Connection cn=null;
@@ -16,7 +18,7 @@ public class DBUtil {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
 			//Step 2: Create a Connection object
-			cn=DriverManager.getConnection("jdbc:oracle:thin:@intvmoradb04.india.tcs.com:1521:JAVADB", "RESCHEDULE_DEV", "tcstvmrsch");
+			cn=DriverManager.getConnection(url);
 			
 		} catch(ClassNotFoundException e){
 			System.out.println(e.getMessage());
