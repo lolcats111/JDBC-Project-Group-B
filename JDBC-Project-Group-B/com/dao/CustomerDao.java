@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import com.bean.Customer;
 import com.util.DBUtil;
 
 public class CustomerDao {
