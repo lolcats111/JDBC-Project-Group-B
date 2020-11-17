@@ -30,5 +30,11 @@ git push -u origin main
 git status
 ```
 
+### Pull!
+ * Get the changes in the hosted repo which aren't in your local repo:
+ ```
+git pull
+ ```
+
 **Rinse and Repeat.**
 
