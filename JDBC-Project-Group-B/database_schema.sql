@@ -15,7 +15,9 @@ CREATE TABLE CUSTOMERS(
 	gender VARCHAR(1) NOT NULL,
 	email VARCHAR(100),
 	phone VARCHAR(15),
-	address VARCHAR(200)
+	address VARCHAR(200), 
+	CONSTRAINT ck_GENDER
+		CHECK (gender in ('M','F','O'))
 );
 
 /* Login Details */
