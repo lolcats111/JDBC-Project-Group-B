@@ -16,8 +16,10 @@ CREATE TABLE CUSTOMERS(
 	email VARCHAR(100),
 	phone VARCHAR(15),
 	address VARCHAR(200), 
-	CONSTRAINT ck_GENDER
-		CHECK (gender in ('M','F','O'))
+	is_privileged CHAR(1) DEFAULT 'N',
+	CONSTRAINT ck_options
+		CHECK (gender in ('M','F','O')),
+		CHECK (is_privileged in ('Y','N'))
 );
 /* id Auto Increment */
 CREATE SEQUENCE cust_id_seq START WITH 1;
@@ -93,8 +95,9 @@ END;
 
 /* Test */
 insert into CUSTOMERS(name, gender) values('mark', 'M');
-insert into BANK_ACCOUNTS(customer_id) values(1);
-insert into TRANSACTIONS(acc_id,amount) values (1,333);
+insert into CUSTOMERS(name, gender, is_privileged) values('mark', 'M', 'N');
+insert into BANK_ACCOUNTS(customer_id) values(21);
+insert into TRANSACTIONS(acc_id,amount) values (22,333);
 select * from TRANSACTIONS;
 select * from BANK_ACCOUNTS;
 select * from CUSTOMERS;
