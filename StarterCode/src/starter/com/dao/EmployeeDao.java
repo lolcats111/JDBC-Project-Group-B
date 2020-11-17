@@ -35,7 +35,7 @@ public class EmployeeDao {
 					long empNo = rs.getLong("EMP_NO");
 					String name = rs.getString("NAME");
 					double salary = rs.getDouble("SALARY");
-					empArray[c] = new Employee(empNo, name, salary);
+					empArray[c] = new Employee();
 					c++;
 				}
 			}
