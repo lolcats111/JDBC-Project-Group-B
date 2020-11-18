@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.bean.BankAccount;
+import com.bean.Transaction;
 import com.util.DBUtil;
 
 public class BankAccountDao {
@@ -14,6 +17,33 @@ public class BankAccountDao {
 		super();
 	}
 
+	
+	public List<BankAccount> getBankAccountsFromCustomers(int customerId) {
+
+		List<BankAccount> bankAccounts = new ArrayList<BankAccount>();
+
+		try {
+
+			Connection cn = DBUtil.createConnection();
+			PreparedStatement ps = cn.prepareStatement("SELECT * from BANK_ACCOUNTS WHERE CUSTOMER_ID=?");
+			ps.setInt(1, customerId);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs != null) {
+				while (rs.next()) {
+					BankAccount account = new BankAccount(rs.getInt("CUSTOMER_ID"), rs.getInt("BALANCE"), rs.getString("ACC_TYPE"));
+					bankAccounts.add(account);
+				}
+			}
+
+			DBUtil.closeAllConnection(cn, ps, rs);
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return bankAccounts;
+	}
+	
 	public BankAccount viewBankAccountDetails(int accountId) {
 
 		BankAccount account = null;

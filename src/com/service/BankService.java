@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.List;
+
 import com.bean.BankAccount;
 import com.dao.BankAccountDao;
 
@@ -11,6 +13,11 @@ public class BankService {
 	public BankAccount viewBankAccountDetails(int accId) {
 		BankAccountDao dao = new BankAccountDao();
 		return dao.viewBankAccountDetails(accId);
+	}
+	
+	public List<BankAccount> getBankAccountFromCustomers(int customerId){
+		BankAccountDao dao = new BankAccountDao();
+		return dao.getBankAccountsFromCustomers(customerId);
 	}
 
 	public BankAccount openAccount(BankAccount acc) {
