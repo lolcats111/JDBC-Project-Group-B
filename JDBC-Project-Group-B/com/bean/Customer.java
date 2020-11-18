@@ -1,36 +1,30 @@
 package com.bean;
 
 public class Customer {
-	private int id;
 	private String name;
 	private char gender;
 	private String email;
 	private String phone;
 	private String address;
+	private String isPrivileged;
 	
-	public Customer(int id, String name, char gender, String email, String phone, String address) {
+	public Customer(String name, char gender, String email, String phone, String address, String isPrivileged) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.email = email;
 		this.phone = phone;
 		this.address = address;
+		this.isPrivileged = isPrivileged;
 	}
 	
-	public Customer(int id, String name, char gender) {
+
+	public Customer(String name, char gender) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.gender = gender;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
@@ -61,7 +55,12 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+	public String getIsPrivileged() {
+		return isPrivileged;
+	}
+	public void setIsPrivileged(String isPrivileged) {
+		this.isPrivileged = isPrivileged;
+	}
 	
 
 }
