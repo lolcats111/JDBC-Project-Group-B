@@ -53,11 +53,11 @@ public class TransactionDao {
         Transaction new_trans = new Transaction(acc_id, amount);
         try {
             Connection cn = DBUtil.createConnection();
-            PreparedStatement ps = cn.prepareStatement("INSERT INTO TRANSACTIONS VALUES(?,?,?,?,?)");
-            ps.setInt(2, new_trans.getAccountId());
-            ps.setString(4, new_trans.getType());
             int record_amount = (int) new_trans.getAmount();
-            ps.setInt(5, record_amount);
+            PreparedStatement ps = cn.prepareStatement("INSERT INTO TRANSACTIONS (acc_id, txn_type, amount) VALUES(?,?,?)");
+            ps.setInt(1, new_trans.getAccountId());
+            ps.setString(2, new_trans.getType());
+            ps.setInt(3, record_amount);
 
             int n = ps.executeUpdate();
 
