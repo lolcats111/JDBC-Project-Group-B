@@ -11,7 +11,7 @@ public class CreateAccountDao {
 	public CreateAccountDao(){
 		super();
 	}
-	public boolean createAccount(String username, String password) {
+	public boolean createAccount(String username, byte[] passwordHash) {
 
 		boolean result = false;
 
@@ -22,12 +22,8 @@ public class CreateAccountDao {
 			// Create a PreparedStatement object using the Connection
 			PreparedStatement ps = cn.prepareStatement("INSERT INTO CLERKS VALUES(?,?)");
 
-			ps.setString(2, c.getName());
-			ps.setString(3, String.valueOf(c.getGender()));
-			ps.setString(4, c.getEmail());
-			ps.setString(5, c.getPhone());
-			ps.setString(6, c.getAddress());
-			ps.setString(7, c.getIsPrivileged());
+			ps.setString(1, username);
+			ps.setBytes(2, passwordHash);
 
 			// Execute query and store the result.
 			int n = ps.executeUpdate();
