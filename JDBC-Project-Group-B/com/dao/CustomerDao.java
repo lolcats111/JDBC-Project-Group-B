@@ -186,14 +186,14 @@ public class CustomerDao {
 			Connection cn = DBUtil.createConnection();
 
 			// Create a PreparedStatement object using the Connection
-			PreparedStatement ps = cn.prepareStatement("INSERT INTO CUSTOMERS(name,gender,email,phone,address, is_privelaged) VALUES(?,?,?,?,?,?)");
+			PreparedStatement ps = cn.prepareStatement("INSERT INTO CUSTOMERS(name,gender,email,phone,address, is_privileged) VALUES(?,?,?,?,?,?)");
 
-			ps.setString(2, c.getName());
-			ps.setString(3, String.valueOf(c.getGender()));
-			ps.setString(4, c.getEmail());
-			ps.setString(5, c.getPhone());
-			ps.setString(6, c.getAddress());
-			ps.setString(7, c.getIsPrivileged());
+			ps.setString(1, c.getName());
+			ps.setString(2, String.valueOf(c.getGender()));
+			ps.setString(3, c.getEmail());
+			ps.setString(4, c.getPhone());
+			ps.setString(5, c.getAddress());
+			ps.setString(6, c.getIsPrivileged());
 
 			// Execute query and store the result.
 			int n = ps.executeUpdate();
