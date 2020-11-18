@@ -24,9 +24,7 @@ public class Customer {
 		this.name = name;
 		this.gender = gender;
 	}
-	
-	
-	
+
 	public int getId() {
 		return id;
 	}

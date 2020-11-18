@@ -103,7 +103,7 @@ public class BankAccountDao {
 //        return balance;
 //    }
 
-	public boolean addMoneyBank (int acc_id, int amount){
+	public boolean addMoneyBank(int acc_id, int amount) {
 //        int current_balance = getCurrentBalance(acc_id);
 //        if (current_balance == -1){
 //            return false;
@@ -132,7 +132,6 @@ public class BankAccountDao {
 		}
 		return result;
 	}
-
 
 	public boolean closeAccount(int accId) {
 
