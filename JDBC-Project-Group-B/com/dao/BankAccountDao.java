@@ -20,7 +20,9 @@ import com.bean.BankAccount;
 import com.util.DBUtil;
 
 public class BankAccountDao {
-
+    public BankAccountDao(){
+        super();
+    }
 	public boolean openAccount (BankAccount account){
 		boolean result = false;
 
@@ -115,7 +117,7 @@ public class BankAccountDao {
 
 
 
-	public boolean closeAccount(long bankNo) {
+	public boolean closeAccount(int accId) {
 
 		boolean result = false;
 
@@ -127,7 +129,7 @@ public class BankAccountDao {
 			PreparedStatement ps = cn
 					.prepareStatement("DELETE FROM BANK_ACCOUNTS WHERE acc_id=?");
 
-			ps.setLong(1, bankNo);
+			ps.setLong(1, accId);
 
 			// Execute the query and store the result.
 			int n = ps.executeUpdate();
