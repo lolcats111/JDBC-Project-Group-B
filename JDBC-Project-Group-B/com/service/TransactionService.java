@@ -2,8 +2,17 @@ package com.service;
 
 import com.bean.Transaction;
 import com.dao.TransactionDao;
+
+import com.bean.Transaction;
+import com.dao.TransactionDao;
 import com.service.BankService;
 public class TransactionService {
+
+	// View customer details by Id
+    public Transaction[] viewTransactionsByBankAccount(int accountId) {
+        TransactionDao dao = new TransactionDao();
+        return dao.getTransactionsByBankAccount(accountId);
+    }
 
 //    public boolean depositMoney(int acc_id, int amount){
 //
