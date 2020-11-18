@@ -17,9 +17,9 @@ public class CustomerService {
 	}
 
 	// View customer details by Id
-	public Customer viewCustomerDetails() {
+	public Customer viewCustomerDetails(int cid) {
 		CustomerDao dao = new CustomerDao();
-		return dao.viewCustomerDetails();
+		return dao.viewCustomerDetails(cid);
 	}
 
 	// Update customer name
@@ -27,7 +27,7 @@ public class CustomerService {
 		CustomerDao dao = new CustomerDao();
 		boolean t = dao.updateCustomerName(cid, name);
 		if (t) {
-			Customer c = viewCustomerDetails();
+			Customer c = viewCustomerDetails(cid);
 			return c.getName();
 		}
 		return null;
@@ -38,7 +38,7 @@ public class CustomerService {
 		CustomerDao dao = new CustomerDao();
 		boolean t = dao.updateCustomerPhone(cid, phone);
 		if (t) {
-			Customer c = viewCustomerDetails();
+			Customer c = viewCustomerDetails(cid);
 			return c.getPhone();
 		}
 		return null;
@@ -49,7 +49,7 @@ public class CustomerService {
 		CustomerDao dao = new CustomerDao();
 		boolean t = dao.updateCustomerEmail(cid, email);
 		if (t) {
-			Customer c = viewCustomerDetails();
+			Customer c = viewCustomerDetails(cid);
 			return c.getEmail();
 		}
 		return null;
@@ -60,7 +60,7 @@ public class CustomerService {
 		CustomerDao dao = new CustomerDao();
 		boolean t = dao.updateCustomerGender(cid, gender);
 		if (t) {
-			Customer c = viewCustomerDetails();
+			Customer c = viewCustomerDetails(cid);
 			return "" + c.getGender();
 		}
 		return null;
@@ -71,7 +71,7 @@ public class CustomerService {
 		CustomerDao dao = new CustomerDao();
 		boolean t = dao.updateCustomerPrivilege(cid, privilege);
 		if (t) {
-			Customer c = viewCustomerDetails();
+			Customer c = viewCustomerDetails(cid);
 			return "" + c.getIsPrivileged();
 		}
 		return null;

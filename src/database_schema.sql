@@ -94,8 +94,11 @@ END;
 
 
 /* Test */
-insert into CUSTOMERS(name, gender) values('mark', 'M');
+
 insert into CUSTOMERS(name, gender, is_privileged) values('mark', 'M', 'N');
+SELECT max(id) as id from CUSTOMERS;
+
+
 insert into BANK_ACCOUNTS(customer_id) values(21);
 insert into TRANSACTIONS(acc_id,amount) values (22,333);
 select * from TRANSACTIONS;

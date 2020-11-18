@@ -33,7 +33,6 @@ public class CustomerDao {
 			DBUtil.closeAllConnection(cn, ps, null);
 
 		} catch (SQLException e) {
-
 			System.out.println(e.getMessage());
 
 		}
@@ -178,49 +177,49 @@ public class CustomerDao {
 
 	public Customer addCustomer(Customer c) {
 
-		boolean resolved = false;
-
 		try {
 			// Create a Connection object
 			Connection cn = DBUtil.createConnection();
 
-			// Create a PreparedStatement object using the Connection
-			PreparedStatement ps = cn.prepareStatement(
-					"INSERT INTO CUSTOMERS(name,gender,email,phone,address, is_privileged) OUTPUT Inserted.id VALUES(?,?,?,?,?,?)");
+			// Insert into the table
+			PreparedStatement ps_ins = cn.prepareStatement(
+					"INSERT INTO CUSTOMERS (name,gender,email,phone,address,is_privileged) VALUES (?,?,?,?,?,?)");
 
-			ps.setString(1, c.getName());
-			ps.setString(2, String.valueOf(c.getGender()));
-			ps.setString(3, c.getEmail());
-			ps.setString(4, c.getPhone());
-			ps.setString(5, c.getAddress());
-			ps.setString(6, c.getIsPrivileged());
+			ps_ins.setString(1, c.getName());
+			ps_ins.setString(2, String.valueOf(c.getGender()));
+			ps_ins.setString(3, c.getEmail());
+			ps_ins.setString(4, c.getPhone());
+			ps_ins.setString(5, c.getAddress());
+			ps_ins.setString(6, c.getIsPrivileged());
 
-			// Execute the query and store the result.
-			ResultSet rs = ps.executeQuery();
-			
+			ps_ins.execute();
+
+			// Get the id of the inserted customer
+			PreparedStatement ps_getid = cn.prepareStatement("select max(id) as id from CUSTOMERS");
+			ResultSet rs = ps_getid.executeQuery();
+
 			if (rs != null) {
 				while (rs.next()) {
 					int id = rs.getInt("id");
 					c.setId(id);
-					resolved = true;
 				}
+			} else {
+				
+				return null;
 			}
 
 			// Close all the objects in the reverse order of its creation.
-			DBUtil.closeAllConnection(cn, ps, null);
+			DBUtil.closeAllConnection(cn, ps_ins, null);
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+			return null;
 		}
-		
-		if(resolved) {
-			return c;
-		}
-		
-		return null;
+
+		return c;
 	}
 
-	public Customer viewCustomerDetails() {
+	public Customer viewCustomerDetails(int cid) {
 		Customer c = null;
 		try {
 			// Create a Connection object
@@ -228,8 +227,7 @@ public class CustomerDao {
 
 			// Create a PreparedStatement object using the Connection
 			PreparedStatement ps = cn.prepareStatement("SELECT * FROM CUSTOMERS WHERE ID=?");
-
-
+			ps.setInt(1, cid);
 			// Execute the query and store the result.
 			ResultSet rs = ps.executeQuery();
 

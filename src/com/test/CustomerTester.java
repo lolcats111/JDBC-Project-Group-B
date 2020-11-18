@@ -20,7 +20,7 @@ public class CustomerTester {
 		CustomerService service = new CustomerService();
 		
 		//Add a customer
-		Customer customer = new Customer("Mark", 'M');
+		Customer customer = new Customer("Pork", 'M');
 		Customer insertedCustomer = service.addCustomer(customer);
 		if(insertedCustomer==null) {
 			throw new Exception("Couldn't insert customer");
