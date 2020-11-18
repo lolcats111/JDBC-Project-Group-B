@@ -128,7 +128,7 @@ public class CustomerDao {
 		try {
 
 			Connection cn = DBUtil.createConnection();
-			PreparedStatement ps = cn.prepareStatement("UPDATE CUSTOMERS SET gender=? WHERE id=?");
+			PreparedStatement ps = cn.prepareStatement("UPDATE CUSTOMERS SET email=? WHERE id=?");
 
 			ps.setString(1, email);
 			ps.setInt(2, customerId);

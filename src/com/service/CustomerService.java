@@ -5,9 +5,6 @@ import com.dao.CustomerDao;
 
 public class CustomerService {
 
-	public CustomerService() {
-		super();
-	}
 
 	// Add customer
 	// Return the customer id. Let -1 denote a bad customer id.
