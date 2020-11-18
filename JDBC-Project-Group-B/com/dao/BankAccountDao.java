@@ -43,6 +43,16 @@ public class BankAccountDao {
 			if (n > 0) {
 				result = true;
 			}
+
+            //Close all the objects in the reverse order of its
+            //creation.
+            DBUtil.closeAllConnection(cn, ps, null);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
     public int getCurrentBalance (int acc_id){
         int balance = -1;
         try {
@@ -103,17 +113,7 @@ public class BankAccountDao {
         return result;
     }
 
-}
 
-			//Close all the objects in the reverse order of its
-			//creation.
-			DBUtil.closeAllConnection(cn, ps, null);
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return result;
-	}
 
 	public boolean closeAccount(long bankNo) {
 
