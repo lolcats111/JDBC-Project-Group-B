@@ -6,28 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.bean.BankAccount;
-import com.util.DBUtil;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import com.bean.BankAccount;
-import com.util.DBUtil;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import starter.com.bean.Employee;
-
-import com.bean.BankAccount;
 import com.bean.Transaction;
 import com.util.DBUtil;
 
