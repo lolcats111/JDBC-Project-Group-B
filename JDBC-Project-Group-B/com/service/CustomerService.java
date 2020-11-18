@@ -16,9 +16,9 @@ public class CustomerService {
     }
 
     // View customer details by Id
-    public Customer viewCustomerDetails(int cid) {
+    public Customer viewCustomerDetails() {
         CustomerDao dao = new CustomerDao();
-        return dao.viewCustomerDetails(cid);
+        return dao.viewCustomerDetails();
     }
 
     // Update customer name
@@ -26,7 +26,7 @@ public class CustomerService {
         CustomerDao dao = new CustomerDao();
         boolean t = dao.updateCustomerName(cid, name);
         if (t) {
-            Customer c = viewCustomerDetails(cid);
+            Customer c = viewCustomerDetails();
             return c.getName();
         }
         return null;
@@ -37,7 +37,7 @@ public class CustomerService {
         CustomerDao dao = new CustomerDao();
         boolean t = dao.updateCustomerPhone(cid, phone);
         if (t) {
-            Customer c = viewCustomerDetails(cid);
+            Customer c = viewCustomerDetails();
             return c.getPhone();
         }
         return null;
@@ -48,7 +48,7 @@ public class CustomerService {
         CustomerDao dao = new CustomerDao();
         boolean t = dao.updateCustomerEmail(cid, email);
         if (t) {
-            Customer c = viewCustomerDetails(cid);
+            Customer c = viewCustomerDetails();
             return c.getEmail();
         }
         return null;
@@ -59,7 +59,7 @@ public class CustomerService {
         CustomerDao dao = new CustomerDao();
         boolean t = dao.updateCustomerGender(cid, gender);
         if (t) {
-            Customer c = viewCustomerDetails(cid);
+            Customer c = viewCustomerDetails();
             return ""+c.getGender();
         }
         return null;
@@ -70,7 +70,7 @@ public class CustomerService {
         CustomerDao dao = new CustomerDao();
         boolean t = dao.updateCustomerPrivilege(cid, privilege);
         if (t) {
-            Customer c = viewCustomerDetails(cid);
+            Customer c = viewCustomerDetails();
             return ""+c.getIsPrivileged();
         }
         return null;

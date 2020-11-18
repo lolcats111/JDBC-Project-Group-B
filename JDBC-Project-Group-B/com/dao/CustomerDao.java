@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import com.bean.Customer;
 import com.util.DBUtil;
@@ -188,14 +186,14 @@ public class CustomerDao {
 			Connection cn = DBUtil.createConnection();
 
 			// Create a PreparedStatement object using the Connection
-			PreparedStatement ps = cn.prepareStatement("INSERT INTO CUSTOMERS VALUES(?,?,?,?,?,?)");
+			PreparedStatement ps = cn.prepareStatement("INSERT INTO CUSTOMERS(name,gender,email,phone,address, is_privileged) VALUES(?,?,?,?,?,?)");
 
-			ps.setInt(1, c.getId());
-			ps.setString(2, c.getName());
-			ps.setString(3, String.valueOf(c.getGender()));
-			ps.setString(4, c.getEmail());
-			ps.setString(5, c.getPhone());
-			ps.setString(6, c.getAddress());
+			ps.setString(1, c.getName());
+			ps.setString(2, String.valueOf(c.getGender()));
+			ps.setString(3, c.getEmail());
+			ps.setString(4, c.getPhone());
+			ps.setString(5, c.getAddress());
+			ps.setString(6, c.getIsPrivileged());
 
 			// Execute query and store the result.
 			int n = ps.executeUpdate();
@@ -214,7 +212,7 @@ public class CustomerDao {
 		return result;
 	}
 
-	public Customer viewCustomerDetails(int cid) {
+	public Customer viewCustomerDetails() {
 		Customer c = null;
 		try {
 			// Create a Connection object
@@ -223,7 +221,7 @@ public class CustomerDao {
 			// Create a PreparedStatement object using the Connection
 			PreparedStatement ps = cn.prepareStatement("SELECT * FROM CUSTOMERS WHERE ID=?");
 
-			ps.setLong(1, cid);
+//			ps.setLong(1, cid);
 
 			// Execute the query and store the result.
 			ResultSet rs = ps.executeQuery();
@@ -231,13 +229,14 @@ public class CustomerDao {
 			// Iterate the result set and extract the information.
 			if (rs != null) {
 				while (rs.next()) {
-					int id = rs.getInt("ID");
 					String name = rs.getString("NAME");
 					char gender = rs.getString("GENDER").charAt(0);
 					String email = rs.getString("EMAIL");
 					String phone = rs.getString("PHONE");
 					String address = rs.getString("ADDRESS");
-					c = new Customer(id, name, gender, email, phone, address);
+					String isPrivileged = rs.getString("IS_PRIVILEGED");
+							
+					c = new Customer(name, gender, email, phone, address, isPrivileged);
 				}
 			}
 
