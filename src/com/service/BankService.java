@@ -7,8 +7,13 @@ public class BankService {
 	public BankService() {
 		super();
 	}
+	
+	public BankAccount viewBankAccountDetails(int accId) {
+		BankAccountDao dao = new BankAccountDao();
+		return dao.viewBankAccountDetails(accId);
+	}
 
-	public boolean openAccount(BankAccount acc) {
+	public BankAccount openAccount(BankAccount acc) {
 		BankAccountDao dao = new BankAccountDao();
 		return dao.openAccount(acc);
 	}

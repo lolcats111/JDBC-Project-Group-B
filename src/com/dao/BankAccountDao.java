@@ -14,7 +14,7 @@ public class BankAccountDao {
 		super();
 	}
 
-	public BankAccount getBankAccount(int accountId) {
+	public BankAccount viewBankAccountDetails(int accountId) {
 
 		BankAccount account = null;
 
@@ -41,8 +41,7 @@ public class BankAccountDao {
 		return account;
 	}
 
-	public boolean openAccount(BankAccount account) {
-		boolean result = false;
+	public BankAccount openAccount(BankAccount account) {
 
 		try {
 			// Create a Connection object
@@ -57,11 +56,20 @@ public class BankAccountDao {
 			ps.setString(3, account.getAccountType());
 
 			// Execute the query and store the result.
-			int n = ps.executeUpdate();
+			ps.executeUpdate();
+			
+			// Get the id of the inserted customer
+			PreparedStatement ps_getid = cn.prepareStatement("select max(ACC_ID) as id from BANK_ACCOUNTS");
+			ResultSet rs = ps_getid.executeQuery();
 
-			// Check the query is success or fail.
-			if (n > 0) {
-				result = true;
+			if (rs != null) {
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					account.setAccountId(id);
+				}
+			} else {
+
+				return null;
 			}
 
 			// Close all the objects in the reverse order of its
@@ -71,7 +79,7 @@ public class BankAccountDao {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		return result;
+		return account;
 	}
 //    public int getCurrentBalance (int acc_id){
 //        int balance = -1;

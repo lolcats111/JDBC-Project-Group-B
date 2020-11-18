@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import com.util.DBUtil;
 
-public class BankTester {
+public class ConnectionTester {
 
 	/**
 	 * @param args

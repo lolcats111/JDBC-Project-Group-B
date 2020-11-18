@@ -2,6 +2,7 @@ package com.bean;
 
 //Test
 public class BankAccount {
+	private int accountId;
 	private int customerId;
 	private double balance;
 	private String accountType;
@@ -42,6 +43,14 @@ public class BankAccount {
 
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
+	}
+	
+	public int getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
 	}
 
 }
