@@ -5,7 +5,6 @@ import com.dao.CustomerDao;
 
 public class CustomerService {
 
-
 	// Add customer
 	// Return the customer id. Let -1 denote a bad customer id.
 	public Customer addCustomer(Customer c) {
@@ -70,6 +69,17 @@ public class CustomerService {
 		if (t) {
 			Customer c = viewCustomerDetails(cid);
 			return "" + c.getIsPrivileged();
+		}
+		return null;
+	}
+
+	// Update customer gender
+	public String updateCustomerAddress(int cid, String address) {
+		CustomerDao dao = new CustomerDao();
+		boolean t = dao.updateCustomerAddress(cid, address);
+		if (t) {
+			Customer c = viewCustomerDetails(cid);
+			return c.getAddress();
 		}
 		return null;
 	}

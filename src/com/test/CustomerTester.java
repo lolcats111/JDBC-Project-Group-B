@@ -32,6 +32,31 @@ public class CustomerTester {
 			System.out.println("Failed editCustomerGender:");
 			System.out.println(e.getMessage());
 		}
+		
+		try {
+			editCustomerPrivilege();
+			System.out.println("Passed editCustomerPrivilege.");
+		} catch (Exception e) {
+			System.out.println("Failed editCustomerPrivilege:");
+			System.out.println(e.getMessage());
+		}
+		
+		
+		try {
+			editCustomerPhone();
+			System.out.println("Passed editCustomerPhone.");
+		} catch (Exception e) {
+			System.out.println("Failed editCustomerPhone:");
+			System.out.println(e.getMessage());
+		}
+		
+		try {
+			editCustomerAddress();
+			System.out.println("Passed editCustomerAddress.");
+		} catch (Exception e) {
+			System.out.println("Failed editCustomerAddress:");
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public static void editCustomerName() throws Exception {
@@ -91,5 +116,67 @@ public class CustomerTester {
 		}
 		
 	}
+	
+	
+	public static void editCustomerPrivilege() throws Exception {
+		CustomerService service = new CustomerService();
+		
+		//Add a customer
+		Customer customer = new Customer("Mary", 'F');
+		Customer insertedCustomer = service.addCustomer(customer);
+		
+		if(insertedCustomer==null) {
+			throw new Exception("Couldn't insert customer");
+		}
+		
+		// Change their name, assert it correctly updates.
+		String newPriv = service.updateCustomerPrivilege(insertedCustomer.getId(), "Y");
+		if(newPriv==null || !newPriv.equals("Y")) {
+			throw new Exception("Couldn't update customer privilege");
+		}
+		
+	}
+	
+	public static void editCustomerPhone() throws Exception {
+		CustomerService service = new CustomerService();
+		
+		//Add a customer
+		Customer customer = new Customer("Wendy", 'F');
+		customer.setPhone("111");
+		Customer insertedCustomer = service.addCustomer(customer);
+		
+		if(insertedCustomer==null) {
+			throw new Exception("Couldn't insert customer");
+		}
+		
+		// Change their name, assert it correctly updates.
+		String newPhone = service.updateCustomerPhone(insertedCustomer.getId(), "222");
+		if(newPhone==null || !newPhone.equals("222")) {
+			throw new Exception("Couldn't update customer phone");
+		}
+		
+	}
+	
+	
+	public static void editCustomerAddress() throws Exception {
+		CustomerService service = new CustomerService();
+		
+		//Add a customer
+		Customer customer = new Customer("Wow", 'M');
+		customer.setAddress("1 Greenfield Way");
+		Customer insertedCustomer = service.addCustomer(customer);
+		
+		if(insertedCustomer==null) {
+			throw new Exception("Couldn't insert customer");
+		}
+		
+		// Change their name, assert it correctly updates.
+		String newAddress = service.updateCustomerAddress(insertedCustomer.getId(), "Moon");
+		if(newAddress==null || !newAddress.equals("Moon")) {
+			throw new Exception("Couldn't update customer address");
+		}
+		
+	}
+
 	
 }
