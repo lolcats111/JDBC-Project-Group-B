@@ -6,4 +6,5 @@ module dao {
 	exports starter.com.service;
 
 	requires java.sql;
+	requires junit;
 }
