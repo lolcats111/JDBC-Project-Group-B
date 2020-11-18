@@ -103,6 +103,7 @@ insert into BANK_ACCOUNTS(customer_id) values(21);
 insert into TRANSACTIONS(acc_id,amount) values (22,333);
 select * from TRANSACTIONS;
 select * from BANK_ACCOUNTS;
+select * from CLERKS;
 select * from CUSTOMERS;
 
 
