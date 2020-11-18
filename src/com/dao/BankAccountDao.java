@@ -73,49 +73,48 @@ public class BankAccountDao {
 		}
 		return result;
 	}
+//    public int getCurrentBalance (int acc_id){
+//        int balance = -1;
+//        try {
+//            // Create a Connection object
+//            Connection cb = DBUtil.createConnection();
+//
+//            // Create a PreparedStatement object using the Connection
+//            PreparedStatement gcb = cb.prepareStatement("SELECT balance INTO result_balance FROM BANK_ACCOUNTS WHERE acc_id=?");
+//
+//            gcb.setLong(1, acc_id);
+//
+//            // Execute the query and store the result.
+//            ResultSet rs = gcb.executeQuery();
+//
+////            // Iterate the result set and extract the information.
+//            if (rs != null) {
+//                while (rs.next()) {
+//                    balance = result_balance;
+//                }
+//            }
+//
+//            // Close all the objects in the reverse order of its creation.
+//            DBUtil.closeAllConnection(cb, gcb, rs);
+//
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return balance;
+//    }
 
-	public int getCurrentBalance(int acc_id) {
-		int balance = -1;
-		try {
-			// Create a Connection object
-			Connection cb = DBUtil.createConnection();
-
-			// Create a PreparedStatement object using the Connection
-			PreparedStatement gcb = cb.prepareStatement("SELECT * FROM BANK_ACCOUNTS WHERE acc_id=?");
-
-			gcb.setLong(1, acc_id);
-
-			// Execute the query and store the result.
-			ResultSet rs = gcb.executeQuery();
-
-			// Iterate the result set and extract the information.
-			if (rs != null) {
-				while (rs.next()) {
-					balance = rs.getInt("balance");
-				}
-			}
-
-			// Close all the objects in the reverse order of its creation.
-			DBUtil.closeAllConnection(cb, gcb, rs);
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return balance;
-	}
-
-	public boolean addMoneyBank(int acc_id, int amount) {
-		int current_balance = getCurrentBalance(acc_id);
-		if (current_balance == -1) {
-			return false;
-		}
+	public boolean addMoneyBank (int acc_id, int amount){
+//        int current_balance = getCurrentBalance(acc_id);
+//        if (current_balance == -1){
+//            return false;
+//        }
 		boolean result = false;
 		try {
 			Connection cn = DBUtil.createConnection();
-			PreparedStatement ps = cn.prepareStatement("UPDATE BANK_ACCOUNTS SET balance=? WHERE acc_id=?");
-			int new_balance = current_balance + amount;
+			PreparedStatement ps = cn.prepareStatement("UPDATE BANK_ACCOUNTS SET balance= balance + ? WHERE acc_id=?");
+//            int new_balance = current_balance + amount;
 
-			ps.setInt(1, new_balance);
+			ps.setInt(1, amount);
 			ps.setInt(2, acc_id);
 
 			int n = ps.executeUpdate();
@@ -133,6 +132,7 @@ public class BankAccountDao {
 		}
 		return result;
 	}
+
 
 	public boolean closeAccount(int accId) {
 
