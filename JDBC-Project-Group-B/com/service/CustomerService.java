@@ -64,6 +64,17 @@ public class CustomerService {
         }
         return null;
     }
+    
+    // Update customer gender
+    public String updateCustomerPrivilege(int cid, String privilege) {
+        CustomerDao dao = new CustomerDao();
+        boolean t = dao.updateCustomerPrivilege(cid, privilege);
+        if (t) {
+            Customer c = viewCustomerDetails(cid);
+            return ""+c.getIsPrivileged();
+        }
+        return null;
+    }
 
     
 }

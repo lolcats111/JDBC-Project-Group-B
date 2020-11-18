@@ -1,5 +1,5 @@
 package com.bean;
-//Test
+
 public class BankAccount {
 	private int customerId;
 	private double balance;
