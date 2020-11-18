@@ -176,9 +176,9 @@ public class CustomerDao {
 		return result;
 	}
 
-	public boolean addCustomer(Customer c) {
+	public Customer addCustomer(Customer c) {
 
-		boolean result = false;
+		boolean resolved = false;
 
 		try {
 			// Create a Connection object
@@ -186,7 +186,7 @@ public class CustomerDao {
 
 			// Create a PreparedStatement object using the Connection
 			PreparedStatement ps = cn.prepareStatement(
-					"INSERT INTO CUSTOMERS(name,gender,email,phone,address, is_privileged) VALUES(?,?,?,?,?,?)");
+					"INSERT INTO CUSTOMERS(name,gender,email,phone,address, is_privileged) OUTPUT Inserted.id VALUES(?,?,?,?,?,?)");
 
 			ps.setString(1, c.getName());
 			ps.setString(2, String.valueOf(c.getGender()));
@@ -195,12 +195,15 @@ public class CustomerDao {
 			ps.setString(5, c.getAddress());
 			ps.setString(6, c.getIsPrivileged());
 
-			// Execute query and store the result.
-			int n = ps.executeUpdate();
-
-			// Check if the query is a success or fails.
-			if (n > 0) {
-				result = true;
+			// Execute the query and store the result.
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs != null) {
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					c.setId(id);
+					resolved = true;
+				}
 			}
 
 			// Close all the objects in the reverse order of its creation.
@@ -209,7 +212,12 @@ public class CustomerDao {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		return result;
+		
+		if(resolved) {
+			return c;
+		}
+		
+		return null;
 	}
 
 	public Customer viewCustomerDetails() {
@@ -221,7 +229,6 @@ public class CustomerDao {
 			// Create a PreparedStatement object using the Connection
 			PreparedStatement ps = cn.prepareStatement("SELECT * FROM CUSTOMERS WHERE ID=?");
 
-//			ps.setLong(1, cid);
 
 			// Execute the query and store the result.
 			ResultSet rs = ps.executeQuery();

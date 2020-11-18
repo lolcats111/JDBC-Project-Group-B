@@ -1,6 +1,7 @@
 package com.bean;
 
 public class Customer {
+	private int id;
 	private String name;
 	private char gender;
 	private String email;
@@ -22,6 +23,16 @@ public class Customer {
 		super();
 		this.name = name;
 		this.gender = gender;
+	}
+	
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {

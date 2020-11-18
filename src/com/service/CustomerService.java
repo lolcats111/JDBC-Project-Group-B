@@ -10,7 +10,8 @@ public class CustomerService {
 	}
 
 	// Add customer
-	public boolean addCustomer(Customer c) {
+	// Return the customer id. Let -1 denote a bad customer id.
+	public Customer addCustomer(Customer c) {
 		CustomerDao dao = new CustomerDao();
 		return dao.addCustomer(c);
 	}
