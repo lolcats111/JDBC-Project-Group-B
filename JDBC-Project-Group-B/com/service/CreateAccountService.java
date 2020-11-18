@@ -1,4 +1,4 @@
-import com.bean.Customer;
+package com.service;
 import com.dao.CreateAccountDao;
 import com.dao.CustomerDao;
 import com.dao.LoginDao;
