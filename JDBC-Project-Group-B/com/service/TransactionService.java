@@ -1,5 +1,8 @@
 package com.service;
 
+import com.bean.Transaction;
+import com.dao.TransactionDao;
+import com.service.BankService;
 public class TransactionService {
 
 //    public boolean depositMoney(int acc_id, int amount){
@@ -27,5 +30,25 @@ public class TransactionService {
 //        }
 //        return true;
 //    }
+    public boolean depositMoney (int acc_id, int amount){
+        TransactionDao transactionDao = new TransactionDao();
+        boolean transactionResult = transactionDao.createTransaction(acc_id, amount);
+        if (!transactionResult){
+            return false;
+        }
+        BankService bankService = new BankService();
+        return bankService.increaseBankBalance(acc_id, amount);
 
+    }
+    public boolean withdrawMoney (int acc_id, int amount){
+        int transaction_amount = -1*amount;
+        TransactionDao transactionDao = new TransactionDao();
+        boolean transactionResult = transactionDao.createTransaction(acc_id, transaction_amount);
+        if (!transactionResult){
+            return false;
+        }
+        BankService bankService = new BankService();
+        return bankService.decreaseBankBalance(acc_id, amount);
+
+    }
 }
