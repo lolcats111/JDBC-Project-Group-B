@@ -14,7 +14,7 @@ import com.util.DBUtil;
 
 public class BankAccountDao {
 	
-	public static BankAccount getBankAccount(int accountId) {
+	public BankAccount getBankAccount(int accountId) {
 		
 		BankAccount account = null;
 		

@@ -11,7 +11,7 @@ import com.util.DBUtil;
 
 public class TransactionDao {
 	
-	public static Transaction[] getTransactionsByBankAccount(int accountId) {
+	public Transaction[] getTransactionsByBankAccount(int accountId) {
 		
 		ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 		
