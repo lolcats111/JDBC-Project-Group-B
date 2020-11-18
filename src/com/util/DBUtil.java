@@ -7,12 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBUtil {
+	
 	static String host = "localhost";
 	static int port = 1521;
-	static String user = "SYSTEM"; //TCSoracle@ for most
-	static String dbname = "server";
-	static String url = "jdbc:oracle:thin:system/System@//localhost:1521/server";
-//	static String url = String.format("jdbc:oracle:thin:@%s:%d:%s", host, port, dbname);
+	static String user = "SYSTEM"; //TCSoracle for most
+	static String password = "password";
+	static String service = "server"; // XE if you have experss edition, something else otherwise.
+
+	static String url = String.format("jdbc:oracle:thin:%s/%s@//%s:%d/%s", user, password,host,port,service);
+
 	public static Connection createConnection() {
 		Connection cn = null;
 		try {
