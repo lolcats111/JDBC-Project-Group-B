@@ -94,7 +94,7 @@ public class BankTester {
 			throw new Exception("There should only be one bank account remaining in Bob's Account");
 		}
 		
-		if(bankAccounts.get(0).getBalance()!= bobSecondAccountInserted.getBalance()){
+		if(bankAccounts.get(0).getAccountId()!= bobSecondAccountInserted.getAccountId()){
 			throw new Exception("Only the Second bank account should remain in Bob's Account");	
 		}
 	}

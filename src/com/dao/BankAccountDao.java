@@ -31,7 +31,7 @@ public class BankAccountDao {
 
 			if (rs != null) {
 				while (rs.next()) {
-					BankAccount account = new BankAccount(rs.getInt("CUSTOMER_ID"), rs.getInt("BALANCE"), rs.getString("ACC_TYPE"));
+					BankAccount account = new BankAccount(rs.getInt("ACC_ID"),rs.getInt("CUSTOMER_ID"), rs.getInt("BALANCE"), rs.getString("ACC_TYPE"));
 					bankAccounts.add(account);
 				}
 			}

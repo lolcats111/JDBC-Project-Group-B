@@ -6,6 +6,14 @@ public class BankAccount {
 	private int customerId;
 	private double balance;
 	private String accountType;
+	
+	public BankAccount(int accountId, int customerId, double balance, String accountType) {
+		super();
+		this.accountId = accountId;
+		this.customerId = customerId;
+		this.balance = balance;
+		this.accountType = accountType;
+	}
 
 	public BankAccount(int customerId, double balance, String accountType) {
 		super();
