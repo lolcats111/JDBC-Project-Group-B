@@ -21,14 +21,14 @@ public class BankAccountDao {
 		try {
 
 			Connection cn = DBUtil.createConnection();
-			PreparedStatement ps = cn.prepareStatement("SELECT * from ACCOUNTS WHERE id=?");
+			PreparedStatement ps = cn.prepareStatement("SELECT * from BANK_ACCOUNTS WHERE ACC_ID=?");
 			ps.setInt(1, accountId);
 			ResultSet rs = ps.executeQuery();
 
 			if (rs != null) {
 				while (rs.next()) {
 					account = new BankAccount(rs.getInt("CUSTOMER_ID"), rs.getDouble("BALANCE"),
-							rs.getString("SALARY"));
+							rs.getString("ACC_TYPE"));
 				}
 			}
 

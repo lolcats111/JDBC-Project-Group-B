@@ -31,10 +31,10 @@ public class TransactionService {
 		BankAccount account = bankService.viewBankAccountDetails(acc_id);
 		double balance = account.getBalance();
 		
-		if ((balance >= amount) || (account.getAccountType() == "CREDIT" && balance >= 0)){
+		if ((balance >= amount) || (account.getAccountType().equals("CREDIT") && balance >= 0)){
 			int transaction_amount = -1 * amount;
 			TransactionDao transactionDao = new TransactionDao();
-			boolean transactionResult = transactionDao.createTransaction(acc_id, amount);
+			boolean transactionResult = transactionDao.createTransaction(acc_id, transaction_amount);
 			if (!transactionResult) {
 				return false;
 			}

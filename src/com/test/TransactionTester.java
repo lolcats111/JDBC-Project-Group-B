@@ -15,7 +15,14 @@ public class TransactionTester {
 			System.out.println(e.getMessage());
 		}
 		
-
+		try {
+			testOverdraftTransaction();
+			System.out.println("Passed testOverdraftTransaction.");
+		} catch (Exception e) {
+			System.out.println("Failed testOverdraftTransaction:");
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 	public static void testGetTransactionsByAccount() throws Exception {
@@ -52,6 +59,47 @@ public class TransactionTester {
 		if (transactions[0].getAmount() != 25) {
 			throw new Exception("Transaction list is incorrect");
 		}
+		
+	}
+	
+	public static void testOverdraftTransaction() throws Exception {
+		
+		CustomerService cs = new CustomerService();
+		Customer customer = new Customer("Bob", 'M');
+		customer = cs.addCustomer(customer);
+
+		if (customer == null) {
+			throw new Exception("Couldn't insert customer");
+		}
+		
+		BankService bs = new BankService();
+		BankAccount regularAccount = new BankAccount(customer.getId(), 100, "REGULAR");
+		regularAccount = bs.openAccount(regularAccount);
+		BankAccount creditAccount = new BankAccount(customer.getId(), 100, "CREDIT");
+		creditAccount = bs.openAccount(creditAccount);
+		
+		if (regularAccount == null || creditAccount == null) {
+			throw new Exception("Couldn't insert accounts");
+		}
+		
+		TransactionService ts = new TransactionService();
+		boolean transactionResult = ts.withdrawMoney(regularAccount.getAccountId(), 150);
+		
+		if (transactionResult) {
+			throw new Exception("Was able to overdraw with regular account");
+		}
+		
+		transactionResult = ts.withdrawMoney(creditAccount.getAccountId(), 150);
+		
+		if (!transactionResult) {
+			throw new Exception("Couldn't overdraw on credit account");
+		}
+		
+		transactionResult = ts.withdrawMoney(creditAccount.getAccountId(), 50);
+		if (transactionResult) {
+			throw new Exception("Was able to overdraw with balance < 0");
+		}
+		
 		
 	}
 
