@@ -10,9 +10,9 @@ public class DBUtil {
 	
 	static String host = "localhost";
 	static int port = 1521;
-	static String user = "system"; //TCSoracle for most
-	static String password = "tcs4641";
-	static String service = "xe"; // XE if you have experss edition, something else otherwise.
+	static String user = "SYSTEM"; //TCSoracle for most
+	static String password = "password";
+	static String service = "server"; // XE if you have experss edition, something else otherwise.
 
 	static String url = String.format("jdbc:oracle:thin:%s/%s@//%s:%d/%s", user, password,host,port,service);
 
