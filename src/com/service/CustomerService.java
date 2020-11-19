@@ -1,6 +1,7 @@
 package com.service;
 
 import com.bean.Customer;
+import com.dao.BankAccountDao;
 import com.dao.CustomerDao;
 
 public class CustomerService {
@@ -87,6 +88,11 @@ public class CustomerService {
 	public Customer[] listCustomers() {
 		CustomerDao dao = new CustomerDao();
 		return dao.listCustomers();
+	}
+	
+	public boolean deleteCustomer(int custId) {
+		CustomerDao dao = new CustomerDao();
+		return dao.deleteCustomer(custId);
 	}
 
 }

@@ -20,6 +20,7 @@ public class BankService {
 		return dao.getBankAccountsFromCustomers(customerId);
 	}
 
+	
 	public BankAccount openAccount(BankAccount acc) {
 		BankAccountDao dao = new BankAccountDao();
 		return dao.openAccount(acc);

@@ -53,6 +53,14 @@ public class CustomerTester {
 			System.out.println("Failed editCustomerAddress:");
 			System.out.println(e.getMessage());
 		}
+		
+		try {
+			deleteCustomer();
+			System.out.println("Passed deleteCustomer.");
+		} catch (Exception e) {
+			System.out.println("Failed deleteCustomer");
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public static void editCustomerName() throws Exception {
@@ -167,6 +175,29 @@ public class CustomerTester {
 		String newAddress = service.updateCustomerAddress(insertedCustomer.getId(), "Moon");
 		if (newAddress == null || !newAddress.equals("Moon")) {
 			throw new Exception("Couldn't update customer address");
+		}
+
+	}
+	
+	public static void deleteCustomer() throws Exception {
+		CustomerService service = new CustomerService();
+
+		// Add a customer
+		Customer customer = new Customer("Max", 'M');
+		customer.setAddress("5 Address Zone");
+		Customer insertedCustomer = service.addCustomer(customer);
+
+		if (insertedCustomer == null) {
+			throw new Exception("Couldn't insert customer");
+		}
+
+		if(!service.deleteCustomer(insertedCustomer.getId())){
+			throw new Exception("Delete Customer Unsuccessful");
+		}
+		
+		//Let's try to find this Customer
+		if(service.viewCustomerDetails(insertedCustomer.getId()) != null){
+			throw new Exception("Customer not Deleted Properly");
 		}
 
 	}
