@@ -1,7 +1,7 @@
 package com.test;
 
-import com.bean.Customer;
-import com.service.CustomerService;
+import com.bean.*;
+import com.service.*;
 
 public class CustomerTester {
 	public static void main(String[] args) {
@@ -59,6 +59,14 @@ public class CustomerTester {
 			System.out.println("Passed deleteCustomer.");
 		} catch (Exception e) {
 			System.out.println("Failed deleteCustomer");
+			System.out.println(e.getMessage());
+		}
+		
+		try {
+			deleteCustomerCheckBankAccountsTransactions();
+			System.out.println("Passed deleteCustomerCheckBankAccountsTransactions.");
+		} catch (Exception e) {
+			System.out.println("Failed deleteCustomerCheckBankAccountsTransactions");
 			System.out.println(e.getMessage());
 		}
 	}
@@ -199,7 +207,59 @@ public class CustomerTester {
 		if(service.viewCustomerDetails(insertedCustomer.getId()) != null){
 			throw new Exception("Customer not Deleted Properly");
 		}
+	
 
 	}
+	//If a customer is deleted all its bank accounts and associated transactions should be deleted
+	public static void deleteCustomerCheckBankAccountsTransactions() throws Exception {
+		CustomerService customerService = new CustomerService();
+
+		// Add a customer
+		Customer customer = new Customer("Lewis", 'M');
+		customer.setAddress("Hello Street");
+		Customer insertedCustomer = customerService.addCustomer(customer);
+		if (insertedCustomer == null) {
+			throw new Exception("Couldn't insert customer");
+		}		
+		BankService bankService = new BankService();
+		BankAccount account = new BankAccount(insertedCustomer.getId(), 100, "REGULAR");
+		BankAccount insertedBankAccount = bankService.openAccount(account);
+		
+		if (insertedBankAccount == null) {
+			throw new Exception("Couldn't insert account");
+		}
+		
+		TransactionService transactionService = new TransactionService();
+		boolean transactionResult = transactionService.depositMoney(insertedBankAccount.getAccountId(), 25);
+		
+		if (!transactionResult) {
+			throw new Exception("Couldn't make transaction");
+		}
+
+		//Actually deleting the customer Lewis
+		if(!customerService.deleteCustomer(insertedCustomer.getId())){
+			throw new Exception("Delete Customer Unsuccessful");
+		}
+		
+		//Let's try to find this Customer
+		if(customerService.viewCustomerDetails(insertedCustomer.getId()) != null){
+			throw new Exception("Customer not Deleted Properly");
+		}
+		
+		//Checking if there is a bank account associated with the deleted customer
+		if(bankService.getBankAccountFromCustomers(insertedCustomer.getId()).size() != 0){
+			throw new Exception("Bank Account for Customer not Deleted Properly");
+
+		}
+		
+		Transaction[] transactions = transactionService.viewTransactionsByBankAccount(insertedCustomer.getId());
+		
+		if (transactions.length != 0) {
+			throw new Exception("Transactions for Customer not Deleted Properly");
+		}
+	
+
+	}
+
 
 }
