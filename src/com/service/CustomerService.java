@@ -83,5 +83,10 @@ public class CustomerService {
 		}
 		return null;
 	}
+	
+	public Customer[] listCustomers() {
+		CustomerDao dao = new CustomerDao();
+		return dao.listCustomers();
+	}
 
 }
