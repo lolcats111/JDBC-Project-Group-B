@@ -43,7 +43,7 @@ public class TransactionDao {
 		return result;
 	}
 
-	public boolean createTransaction(int acc_id, int amount) {
+	public boolean createTransaction(int acc_id, double amount) {
 //    public boolean depositMoney(Transaction c){
 		boolean result = false;
 		Transaction new_trans = new Transaction(acc_id, amount);

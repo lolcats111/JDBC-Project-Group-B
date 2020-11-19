@@ -41,12 +41,12 @@ public class BankService {
 		return dao.closeAccount(accId);
 	}
 
-	public boolean increaseBankBalance(int acc_id, int amount) {
+	public boolean increaseBankBalance(int acc_id, double amount) {
 		BankAccountDao bankDao = new BankAccountDao();
 		return bankDao.addMoneyBank(acc_id, amount);
 	}
 
-	public boolean decreaseBankBalance(int acc_id, int amount) {
+	public boolean decreaseBankBalance(int acc_id, double amount) {
 		amount = -1 * amount;
 		BankAccountDao bankDao = new BankAccountDao();
 		return bankDao.addMoneyBank(acc_id, amount);

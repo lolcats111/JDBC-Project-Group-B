@@ -148,6 +148,15 @@ public class CommandLineInterface {
 			case closeAccountOption:
 				output = runCloseAccount();
 				break;
+			case depositAmountOption:
+				output = runDepositAmount();
+				break;
+			case withdrawAmountOption:
+				output = runWithdrawAmount();
+				break;
+			case viewTransactionsOption:
+				output = runViewTransactions();
+				break;
 			
 		}
 		
@@ -294,6 +303,66 @@ public class CommandLineInterface {
  		return header("Account Closed");
  		
  	}
+ 	
+ 	static String runDepositAmount() {
+ 		
+ 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println(header("Make Deposit"));
+		
+ 		System.out.print(field("Account Id"));
+ 		int id = sc.nextInt();
+ 		sc.nextLine();
+ 		System.out.print(field("Amount"));
+ 		double amount = sc.nextDouble();
+ 		
+ 		TransactionService ts = new TransactionService();
+ 		ts.depositMoney(id, amount);
+ 		
+ 		BankService bs = new BankService();
+ 		return display(bs.viewBankAccountDetails(id));
+ 	}
+ 	
+ 	static String runWithdrawAmount() {
+ 		
+ 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println(header("Make Withdrawal"));
+		
+ 		System.out.print(field("Account Id"));
+ 		int id = sc.nextInt();
+ 		sc.nextLine();
+ 		System.out.print(field("Amount"));
+ 		double amount = sc.nextDouble();
+ 		
+ 		TransactionService ts = new TransactionService();
+ 		ts.withdrawMoney(id, amount);
+ 		
+ 		BankService bs = new BankService();
+ 		return display(bs.viewBankAccountDetails(id));
+ 		
+ 	}
+ 	
+ 	static String runViewTransactions() {
+ 		
+ 		String output = "";
+ 		
+ 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println(header("View Transactions"));
+		
+ 		System.out.print(field("Account Id"));
+ 		int id = sc.nextInt();
+ 		
+ 		TransactionService ts = new TransactionService();
+ 		Transaction[] transactions  = ts.viewTransactionsByBankAccount(id);
+ 		
+ 		for (Transaction transaction : transactions) {
+			output += (display(transaction) + "\n\n");
+		}
+		
+		return output;
+ 	}
 	
 	static String display (Customer customer) {
 		
@@ -313,6 +382,11 @@ public class CommandLineInterface {
 				+ field("Type") + account.getAccountType();
 	}
 	
+	static String display(Transaction transaction) {
+		return field("Account Id") + transaction.getAccountId() + "\n"
+				+ field("Type") + transaction.getType() + "\n"
+				+ field("Amount") + transaction.getAmount();
+	}
 	
 	static String header (String text) {
 		return ("\n" + center(text) + "\n");
