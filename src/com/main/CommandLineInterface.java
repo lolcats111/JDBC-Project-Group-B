@@ -165,7 +165,20 @@ public class CommandLineInterface {
 	}
 
 	static String runListCustomers() {
-		return "";
+		
+		String output = "";
+		
+		CustomerService cs = new CustomerService();
+		
+		Customer[] customers = cs.listCustomers();
+		
+		for (Customer customer : customers) {
+			output += (display(customer) + "\n\n");
+		}
+		
+		return output;
+		
+		
 	}
 	
 	static String display (Customer customer) {

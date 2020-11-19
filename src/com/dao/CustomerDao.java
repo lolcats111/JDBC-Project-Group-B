@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.bean.Customer;
+import com.bean.Transaction;
 import com.util.DBUtil;
 
 public class CustomerDao {
@@ -253,6 +255,47 @@ public class CustomerDao {
 		}
 		return c;
 
+	}
+	
+	public Customer[] listCustomers() {
+
+		ArrayList<Customer> customers = new ArrayList<Customer>();
+
+		try {
+
+			Connection cn = DBUtil.createConnection();
+			PreparedStatement ps = cn.prepareStatement("SELECT * from CUSTOMERS");
+			ResultSet rs = ps.executeQuery();
+
+			if (rs != null) {
+				while (rs.next()) {
+
+					Customer customer = new Customer(
+							rs.getString("NAME"),
+							rs.getString("GENDER").charAt(0),
+							rs.getString("EMAIL"),
+							rs.getString("PHONE"),
+							rs.getString("ADDRESS"),
+							rs.getString("IS_PRIVILEGED")
+					);
+					
+					customer.setId(rs.getInt("ID"));
+					
+					customers.add(customer);
+				}
+				
+			}
+
+			DBUtil.closeAllConnection(cn, ps, rs);
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+		Customer[] result = new Customer[customers.size()];
+		result = customers.toArray(result);
+
+		return result;
 	}
 
 }
