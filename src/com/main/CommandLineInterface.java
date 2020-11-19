@@ -68,6 +68,7 @@ public class CommandLineInterface {
 					break;
 				case homeQuitOption:
 					System.exit(1);
+					break;
 				default:
 					option = accountOptionSelect();
 				}
@@ -195,37 +196,37 @@ public class CommandLineInterface {
 		String output = "";
 
 		switch (option) {
-			case addCustomerOption:
-				output = runAddCustomer();
-				break;
-			case listCustomersOption:
-				output = runListCustomers();
-				break;
-			case viewCustomerOption:
-				output = runViewCustomer();
-				break;
-			case editCustomerOption:
-				output = runEditCustomer();
-				break;
-			case deleteCustomerOption:
-				output = runDeleteCustomer();
-				break;
-			case openAccountOption:
-				output = runOpenAccount();
-				break;
-			case closeAccountOption:
-				output = runCloseAccount();
-				break;
-			case depositAmountOption:
-				output = runDepositAmount();
-				break;
-			case withdrawAmountOption:
-				output = runWithdrawAmount();
-				break;
-			case viewTransactionsOption:
-				output = runViewTransactions();
-				break;
-			
+		case addCustomerOption:
+			output = runAddCustomer();
+			break;
+		case listCustomersOption:
+			output = runListCustomers();
+			break;
+		case viewCustomerOption:
+			output = runViewCustomer();
+			break;
+		case editCustomerOption:
+			output = runEditCustomer();
+			break;
+		case deleteCustomerOption:
+			output = runDeleteCustomer();
+			break;
+		case openAccountOption:
+			output = runOpenAccount();
+			break;
+		case closeAccountOption:
+			output = runCloseAccount();
+			break;
+		case depositAmountOption:
+			output = runDepositAmount();
+			break;
+		case withdrawAmountOption:
+			output = runWithdrawAmount();
+			break;
+		case viewTransactionsOption:
+			output = runViewTransactions();
+			break;
+
 		}
 
 		return output;
@@ -361,100 +362,96 @@ public class CommandLineInterface {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println(header("Close Account"));
-		
- 		System.out.print(field("Account Id"));
- 		int id = sc.nextInt();
- 		
- 		BankService bs = new BankService();
- 		bs.closeAccount(id);
- 			
- 		return header("Account Closed");
- 		
- 	}
- 	
- 	static String runDepositAmount() {
- 		
- 		Scanner sc = new Scanner(System.in);
-		
+
+		System.out.print(field("Account Id"));
+		int id = sc.nextInt();
+
+		BankService bs = new BankService();
+		bs.closeAccount(id);
+
+		return header("Account Closed");
+
+	}
+
+	static String runDepositAmount() {
+
+		Scanner sc = new Scanner(System.in);
+
 		System.out.println(header("Make Deposit"));
-		
- 		System.out.print(field("Account Id"));
- 		int id = sc.nextInt();
- 		sc.nextLine();
- 		System.out.print(field("Amount"));
- 		double amount = sc.nextDouble();
- 		
- 		TransactionService ts = new TransactionService();
- 		ts.depositMoney(id, amount);
- 		
- 		BankService bs = new BankService();
- 		return display(bs.viewBankAccountDetails(id));
- 	}
- 	
- 	static String runWithdrawAmount() {
- 		
- 		Scanner sc = new Scanner(System.in);
-		
+
+		System.out.print(field("Account Id"));
+		int id = sc.nextInt();
+		sc.nextLine();
+		System.out.print(field("Amount"));
+		double amount = sc.nextDouble();
+
+		TransactionService ts = new TransactionService();
+		ts.depositMoney(id, amount);
+
+		BankService bs = new BankService();
+		return display(bs.viewBankAccountDetails(id));
+	}
+
+	static String runWithdrawAmount() {
+
+		Scanner sc = new Scanner(System.in);
+
 		System.out.println(header("Make Withdrawal"));
-		
- 		System.out.print(field("Account Id"));
- 		int id = sc.nextInt();
- 		sc.nextLine();
- 		System.out.print(field("Amount"));
- 		double amount = sc.nextDouble();
- 		
- 		TransactionService ts = new TransactionService();
- 		ts.withdrawMoney(id, amount);
- 		
- 		BankService bs = new BankService();
- 		return display(bs.viewBankAccountDetails(id));
- 		
- 	}
- 	
- 	static String runViewTransactions() {
- 		
- 		String output = "";
- 		
- 		Scanner sc = new Scanner(System.in);
-		
+
+		System.out.print(field("Account Id"));
+		int id = sc.nextInt();
+		sc.nextLine();
+		System.out.print(field("Amount"));
+		double amount = sc.nextDouble();
+
+		TransactionService ts = new TransactionService();
+		ts.withdrawMoney(id, amount);
+
+		BankService bs = new BankService();
+		return display(bs.viewBankAccountDetails(id));
+
+	}
+
+	static String runViewTransactions() {
+
+		String output = "";
+
+		Scanner sc = new Scanner(System.in);
+
 		System.out.println(header("View Transactions"));
-		
- 		System.out.print(field("Account Id"));
- 		int id = sc.nextInt();
- 		
- 		TransactionService ts = new TransactionService();
- 		Transaction[] transactions  = ts.viewTransactionsByBankAccount(id);
- 		
- 		for (Transaction transaction : transactions) {
+
+		System.out.print(field("Account Id"));
+		int id = sc.nextInt();
+
+		TransactionService ts = new TransactionService();
+		Transaction[] transactions = ts.viewTransactionsByBankAccount(id);
+
+		for (Transaction transaction : transactions) {
 			output += (display(transaction) + "\n\n");
 		}
-		
+
 		return output;
- 	}
-	
-	static String display (Customer customer) {
-		
-		return field("Id") + customer.getId() + "\n"
-				+ field("Name") + customer.getName() + "\n"
-				+ field("Gender") + customer.getGender() + "\n"
-				+ field("Email") + customer.getEmail() + "\n"
-				+ field("Phone") + customer.getPhone() + "\n"
-				+ field("Address") + customer.getAddress() + "\n"
-				+ field("Privileged") + customer.getIsPrivileged();
+	}
+
+	static String display(Customer customer) {
+
+		return field("Id") + customer.getId() + "\n" + field("Name") + customer.getName() + "\n" + field("Gender")
+				+ customer.getGender() + "\n" + field("Email") + customer.getEmail() + "\n" + field("Phone")
+				+ customer.getPhone() + "\n" + field("Address") + customer.getAddress() + "\n" + field("Privileged")
+				+ customer.getIsPrivileged();
 	}
 
 	static String display(BankAccount account) {
 		return field("Account Id") + account.getAccountId() + "\n" + field("Customer Id") + account.getCustomerId()
 				+ "\n" + field("Balance") + account.getBalance() + "\n" + field("Type") + account.getAccountType();
 	}
-	
+
 	static String display(Transaction transaction) {
-		return field("Account Id") + transaction.getAccountId() + "\n"
-				+ field("Type") + transaction.getType() + "\n"
+		return field("Account Id") + transaction.getAccountId() + "\n" + field("Type") + transaction.getType() + "\n"
 				+ field("Amount") + transaction.getAmount();
 	}
-	
-	static String header (String text) {
+
+	static String header(String text) {
 		return ("\n" + center(text) + "\n");
 	}
 
