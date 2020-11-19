@@ -6,13 +6,12 @@ import com.dao.TransactionDao;
 
 public class TransactionService {
 
-	// View customer details by Id
 	public Transaction[] viewTransactionsByBankAccount(int accountId) {
 		TransactionDao dao = new TransactionDao();
 		return dao.getTransactionsByBankAccount(accountId);
 	}
 
-	public boolean depositMoney(int acc_id, int amount) {
+	public boolean depositMoney(int acc_id, double amount) {
 		TransactionDao transactionDao = new TransactionDao();
 		boolean transactionResult = transactionDao.createTransaction(acc_id, amount);
 		if (!transactionResult) {
@@ -23,7 +22,7 @@ public class TransactionService {
 
 	}
 
-	public boolean withdrawMoney(int acc_id, int amount) {
+	public boolean withdrawMoney(int acc_id, double amount) {
 		
 		boolean result = false;
 		
@@ -32,7 +31,7 @@ public class TransactionService {
 		double balance = account.getBalance();
 		
 		if ((balance >= amount) || (account.getAccountType().equals("CREDIT") && balance >= 0)){
-			int transaction_amount = -1 * amount;
+			double transaction_amount = -1 * amount;
 			TransactionDao transactionDao = new TransactionDao();
 			boolean transactionResult = transactionDao.createTransaction(acc_id, transaction_amount);
 			if (!transactionResult) {

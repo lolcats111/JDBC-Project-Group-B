@@ -31,7 +31,7 @@ public class BankAccountDao {
 
 			if (rs != null) {
 				while (rs.next()) {
-					BankAccount account = new BankAccount(rs.getInt("ACC_ID"),rs.getInt("CUSTOMER_ID"), rs.getInt("BALANCE"), rs.getString("ACC_TYPE"));
+					BankAccount account = new BankAccount(rs.getInt("ACC_ID"),rs.getInt("CUSTOMER_ID"), rs.getDouble("BALANCE"), rs.getString("ACC_TYPE"));
 					bankAccounts.add(account);
 				}
 			}
@@ -141,7 +141,7 @@ public class BankAccountDao {
 //        return balance;
 //    }
 
-	public boolean addMoneyBank(int acc_id, int amount) {
+	public boolean addMoneyBank(int acc_id, double amount) {
 //        int current_balance = getCurrentBalance(acc_id);
 //        if (current_balance == -1){
 //            return false;
@@ -152,7 +152,7 @@ public class BankAccountDao {
 			PreparedStatement ps = cn.prepareStatement("UPDATE BANK_ACCOUNTS SET balance= balance + ? WHERE acc_id=?");
 //            int new_balance = current_balance + amount;
 
-			ps.setInt(1, amount);
+			ps.setDouble(1, amount);
 			ps.setInt(2, acc_id);
 
 			int n = ps.executeUpdate();
