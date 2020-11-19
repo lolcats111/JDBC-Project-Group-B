@@ -145,6 +145,9 @@ public class CommandLineInterface {
 			case openAccountOption:
 				output = runOpenAccount();
 				break;
+			case closeAccountOption:
+				output = runCloseAccount();
+				break;
 			
 		}
 		
@@ -259,7 +262,7 @@ public class CommandLineInterface {
  		
  		Scanner sc = new Scanner(System.in);
 		
-		System.out.println(header("Account Registration"));
+		System.out.println(header("Open Account"));
 		
 		System.out.print(field("Customer Id"));
 		int customerId = sc.nextInt();
@@ -274,6 +277,22 @@ public class CommandLineInterface {
 		BankService bs = new BankService();
 		
  		return display(bs.openAccount(account));
+ 	}
+ 	
+ 	static String runCloseAccount() {
+ 		
+ 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println(header("Close Account"));
+		
+ 		System.out.print(field("Account Id"));
+ 		int id = sc.nextInt();
+ 		
+ 		BankService bs = new BankService();
+ 		bs.closeAccount(id);
+ 			
+ 		return header("Account Closed");
+ 		
  	}
 	
 	static String display (Customer customer) {
