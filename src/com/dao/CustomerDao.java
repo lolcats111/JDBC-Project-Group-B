@@ -220,6 +220,38 @@ public class CustomerDao {
 
 		return c;
 	}
+	
+	public boolean deleteCustomer(int custId) {
+
+		boolean result = false;
+
+		try {
+			// Create a Connection object
+			Connection cn = DBUtil.createConnection();
+
+			// Create a PreparedStatement object using the Connection
+			PreparedStatement ps = cn.prepareStatement("DELETE FROM CUSTOMERS WHERE id=?");
+
+			ps.setLong(1, custId);
+
+			// Execute the query and store the result.
+			int n = ps.executeUpdate();
+
+			// Check the query is success or fail.
+			if (n > 0) {
+				result = true;
+			}
+
+			// Close all the objects in the reverse order of its
+			// creation.
+			DBUtil.closeAllConnection(cn, ps, null);
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+
 
 	public Customer viewCustomerDetails(int cid) {
 		Customer c = null;

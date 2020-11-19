@@ -47,7 +47,7 @@ CREATE TABLE CLERKS(
 
 CREATE TABLE BANK_ACCOUNTS(
 	acc_id NUMBER PRIMARY KEY,
-	customer_id NUMBER NOT NULL REFERENCES CUSTOMERS(id),
+	customer_id NUMBER NOT NULL REFERENCES CUSTOMERS(id) ON DELETE CASCADE,
 	balance NUMBER DEFAULT 0,
 	acc_type VARCHAR(10) DEFAULT 'REGULAR',
 	CONSTRAINT ck_BANK_TYPE
@@ -71,7 +71,7 @@ END;
 /* Transactions */
 CREATE TABLE TRANSACTIONS(
 	txn_id NUMBER PRIMARY KEY,
-	acc_id NUMBER NOT NULL REFERENCES BANK_ACCOUNTS(acc_id),
+	acc_id NUMBER NOT NULL REFERENCES BANK_ACCOUNTS(acc_id) ON DELETE CASCADE,
 	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	txn_type VARCHAR(10) DEFAULT 'REGULAR',
 	amount NUMBER NOT NULL,
@@ -96,15 +96,17 @@ END;
 /* Test */
 
 insert into CUSTOMERS(name, gender, is_privileged) values('mark', 'M', 'N');
-SELECT max(id) as id from CUSTOMERS;
-
-
-insert into BANK_ACCOUNTS(customer_id) values(21);
-insert into TRANSACTIONS(acc_id,amount) values (22,333);
-select * from TRANSACTIONS;
+select * from CUSTOMERS;
+insert into BANK_ACCOUNTS(customer_id) values(36);
 select * from BANK_ACCOUNTS;
+insert into TRANSACTIONS(acc_id,amount) values (43,333);
+select * from TRANSACTIONS;
+delete from CUSTOMERS where id = 36;
+select * from CUSTOMERS;
+
 select * from CLERKS;
 select * from CUSTOMERS;
+select * from BANK_ACCOUNTS;
 
 
 ROLLBACK TO makeTables;
