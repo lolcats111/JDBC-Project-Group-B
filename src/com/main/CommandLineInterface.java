@@ -138,6 +138,9 @@ public class CommandLineInterface {
 			case editCustomerOption:
 				output = runEditCustomer();
 				break;
+			case deleteCustomerOption:
+				output = runDeleteCustomer();
+				break;
 			
 		}
 		
@@ -232,6 +235,21 @@ public class CommandLineInterface {
  		
  		return display(cs.viewCustomerDetails(id));
  		
+ 	}
+ 	
+ 	static String runDeleteCustomer() {
+ 		
+ 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println(header("Delete Customer"));
+		
+ 		System.out.print(field("Customer Id", 15));
+ 		int id = sc.nextInt();
+ 		
+ 		CustomerService cs = new CustomerService();
+ 		cs.deleteCustomer(id);
+ 			
+ 		return header("Customer Deleted");
  	}
 	
 	static String display (Customer customer) {
