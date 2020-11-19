@@ -8,14 +8,14 @@ import com.service.*;
 
 public class CommandLineInterface {
 
-	static final int lineLength = 40;
+	static final int lineLength = 50;
 	static final int screenHeight = 20;
 	static final int indent = 5;
+	static final int fieldLength = 20;
 
 	static final int loginOption = 1;
 	static final int createAccountOption = 2;
 	static final int homeQuitOption = 3;
-
 	static final int noOption = 0;
 	static final int addCustomerOption = 1;
 	static final int listCustomersOption = 2;
@@ -101,10 +101,10 @@ public class CommandLineInterface {
 
 		System.out.println(header("Login"));
 
-		System.out.print(field("Username", 15));
+		System.out.print(field("Username"));
 		String username = sc.nextLine();
 
-		System.out.print(field("Password", 15));
+		System.out.print(field("Password"));
 		String password = sc.nextLine();
 
 		LoginService loginService = new LoginService();
@@ -125,10 +125,10 @@ public class CommandLineInterface {
 
 		System.out.println(header("Create Clerk Account"));
 
-		System.out.print(field("Username", 15));
+		System.out.print(field("Username"));
 		String username = sc.nextLine();
 
-		System.out.print(field("Password", 15));
+		System.out.print(field("Password"));
 		String password = sc.nextLine();
 
 		CreateAccountService cas = new CreateAccountService();
@@ -155,7 +155,7 @@ public class CommandLineInterface {
 		System.out.println(option(homeQuitOption, "Quit"));
 
 		System.out.println();
-		System.out.print(field("Select your option", 15));
+		System.out.print(field("Select your option"));
 		option = sc.nextInt();
 
 		return option;
@@ -183,7 +183,7 @@ public class CommandLineInterface {
 		System.out.println(option(quitOption, "Quit"));
 
 		System.out.println();
-		System.out.print(field("Select your option", 15));
+		System.out.print(field("Select your option"));
 		option = sc.nextInt();
 
 		return option;
@@ -201,6 +201,22 @@ public class CommandLineInterface {
 		case listCustomersOption:
 			output = runListCustomers();
 			break;
+		case viewCustomerOption:
+			output = runViewCustomer();
+			break;
+		case editCustomerOption:
+			output = runEditCustomer();
+			break;
+		case deleteCustomerOption:
+			output = runDeleteCustomer();
+			break;
+		case openAccountOption:
+			output = runOpenAccount();
+			break;
+		case closeAccountOption:
+			output = runCloseAccount();
+			break;
+
 		}
 
 		return output;
@@ -213,17 +229,17 @@ public class CommandLineInterface {
 
 		System.out.println(header("Customer Registration"));
 
-		System.out.print(field("Name", 15));
+		System.out.print(field("Name"));
 		String name = sc.nextLine();
-		System.out.print(field("Gender", 15));
+		System.out.print(field("Gender"));
 		char gender = sc.nextLine().charAt(0);
-		System.out.print(field("Email", 15));
+		System.out.print(field("Email"));
 		String email = sc.nextLine();
-		System.out.print(field("Phone", 15));
+		System.out.print(field("Phone"));
 		String phone = sc.nextLine();
-		System.out.print(field("Address", 15));
+		System.out.print(field("Address"));
 		String address = sc.nextLine();
-		System.out.print(field("Privileged", 15));
+		System.out.print(field("Privileged"));
 		String isPrivileged = sc.nextLine();
 
 		CustomerService cs = new CustomerService();
@@ -248,16 +264,116 @@ public class CommandLineInterface {
 
 	}
 
+	static String runViewCustomer() {
+
+		System.out.println(header("View Customer"));
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print(field("Customer Id"));
+		int id = sc.nextInt();
+
+		CustomerService cs = new CustomerService();
+
+		return display(cs.viewCustomerDetails(id));
+	}
+
+	static String runEditCustomer() {
+
+		Scanner sc = new Scanner(System.in);
+		CustomerService cs = new CustomerService();
+
+		System.out.println(header("Edit Customer"));
+
+		System.out.print(field("Customer Id"));
+		int id = sc.nextInt();
+		sc.nextLine();
+		System.out.print(field("Field to edit"));
+		String fieldChoice = sc.nextLine();
+		System.out.print(field("New value"));
+		String newValue = sc.nextLine();
+
+		if (fieldChoice.equals("Name")) {
+			cs.updateCustomerName(id, newValue);
+		} else if (fieldChoice.equalsIgnoreCase("Gender")) {
+			cs.updateCustomerGender(id, newValue);
+		} else if (fieldChoice.equalsIgnoreCase("Email")) {
+			cs.updateCustomerEmail(id, newValue);
+		} else if (fieldChoice.equalsIgnoreCase("Phone")) {
+			cs.updateCustomerPhone(id, newValue);
+		} else if (fieldChoice.equalsIgnoreCase("Address")) {
+			cs.updateCustomerAddress(id, newValue);
+		} else if (fieldChoice.equalsIgnoreCase("Privilege")) {
+			cs.updateCustomerPrivilege(id, newValue);
+		}
+
+		return display(cs.viewCustomerDetails(id));
+
+	}
+
+	static String runDeleteCustomer() {
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println(header("Delete Customer"));
+
+		System.out.print(field("Customer Id"));
+		int id = sc.nextInt();
+
+		CustomerService cs = new CustomerService();
+		cs.deleteCustomer(id);
+
+		return header("Customer Deleted");
+	}
+
+	static String runOpenAccount() {
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println(header("Open Account"));
+
+		System.out.print(field("Customer Id"));
+		int customerId = sc.nextInt();
+		sc.nextLine();
+		System.out.print(field("Balance"));
+		double balance = sc.nextDouble();
+		sc.nextLine();
+		System.out.print(field("Type"));
+		String type = sc.nextLine();
+
+		BankAccount account = new BankAccount(customerId, balance, type);
+		BankService bs = new BankService();
+
+		return display(bs.openAccount(account));
+	}
+
+	static String runCloseAccount() {
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println(header("Close Account"));
+
+		System.out.print(field("Account Id"));
+		int id = sc.nextInt();
+
+		BankService bs = new BankService();
+		bs.closeAccount(id);
+
+		return header("Account Closed");
+
+	}
+
 	static String display(Customer customer) {
 
-		return field("Id", 15) + customer.getId() + "\n" + field("Name", 15) + customer.getName() + "\n"
-				+ field("Gender", 15) + customer.getGender() + "\n" + field("Email", 15) + customer.getEmail() + "\n"
-				+ field("Phone", 15) + customer.getPhone() + "\n" + field("Address", 15) + customer.getAddress() + "\n"
-				+ field("Privileged", 15) + customer.getIsPrivileged();
+		return field("Id") + customer.getId() + "\n" + field("Name") + customer.getName() + "\n" + field("Gender")
+				+ customer.getGender() + "\n" + field("Email") + customer.getEmail() + "\n" + field("Phone")
+				+ customer.getPhone() + "\n" + field("Address") + customer.getAddress() + "\n" + field("Privileged")
+				+ customer.getIsPrivileged();
 	}
 
 	static String display(BankAccount account) {
-		return "";
+		return field("Account Id") + account.getAccountId() + "\n" + field("Customer Id") + account.getCustomerId()
+				+ "\n" + field("Balance") + account.getBalance() + "\n" + field("Type") + account.getAccountType();
 	}
 
 	static String header(String text) {
@@ -279,10 +395,10 @@ public class CommandLineInterface {
 
 	}
 
-	static String field(String text, int width) {
+	static String field(String text) {
 		int leftPadding = (text.length() + indent);
 		text = String.format("%" + leftPadding + "s", text);
-		text = String.format("%-" + width + "s", text);
+		text = String.format("%-" + fieldLength + "s", text);
 		return text + ": ";
 	}
 

@@ -276,6 +276,7 @@ public class CustomerDao {
 					String isPrivileged = rs.getString("IS_PRIVILEGED");
 
 					c = new Customer(name, gender, email, phone, address, isPrivileged);
+					c.setId(rs.getInt("ID"));
 				}
 			}
 
@@ -288,7 +289,7 @@ public class CustomerDao {
 		return c;
 
 	}
-	
+
 	public Customer[] listCustomers() {
 
 		ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -310,12 +311,12 @@ public class CustomerDao {
 							rs.getString("ADDRESS"),
 							rs.getString("IS_PRIVILEGED")
 					);
-					
+
 					customer.setId(rs.getInt("ID"));
-					
+
 					customers.add(customer);
 				}
-				
+
 			}
 
 			DBUtil.closeAllConnection(cn, ps, rs);

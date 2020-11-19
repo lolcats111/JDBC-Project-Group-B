@@ -2,7 +2,7 @@ package com.service;
 
 import java.util.List;
 
-import com.bean.BankAccount;
+import com.bean.*;
 import com.dao.BankAccountDao;
 
 public class BankService {
@@ -22,8 +22,18 @@ public class BankService {
 
 	
 	public BankAccount openAccount(BankAccount acc) {
-		BankAccountDao dao = new BankAccountDao();
-		return dao.openAccount(acc);
+		
+		BankAccount result = null;
+		CustomerService cs = new CustomerService();
+		Customer customer = cs.viewCustomerDetails(acc.getCustomerId());
+		
+		if (acc.getAccountType().equals("REGULAR") 
+			|| customer.getIsPrivileged().equals("Y")) {
+			BankAccountDao dao = new BankAccountDao();
+			result = dao.openAccount(acc);
+		}
+		
+		return result;
 	}
 
 	public boolean closeAccount(int accId) {
