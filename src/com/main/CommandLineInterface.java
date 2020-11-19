@@ -126,12 +126,19 @@ public class CommandLineInterface {
 		String output = "";
 		
 		switch (option) {
-		  case addCustomerOption:
-		    output = runAddCustomer();
-		    break;
-		  case listCustomersOption:
-		    output = runListCustomers();
-		    break;
+			case addCustomerOption:
+				output = runAddCustomer();
+				break;
+			case listCustomersOption:
+				output = runListCustomers();
+				break;
+			case viewCustomerOption:
+				output = runViewCustomer();
+				break;
+			case editCustomerOption:
+				output = runEditCustomer();
+				break;
+			
 		}
 		
 		
@@ -178,8 +185,54 @@ public class CommandLineInterface {
 		
 		return output;
 		
-		
 	}
+	
+ 	static String runViewCustomer() {
+ 		
+ 		System.out.println(header("View Customer"));
+ 		
+ 		Scanner sc = new Scanner(System.in);
+ 		
+ 		System.out.print(field("Customer Id", 15));
+ 		int id = sc.nextInt();
+ 		
+ 		CustomerService cs = new CustomerService();
+ 	
+ 		return display(cs.viewCustomerDetails(id));
+ 	}
+ 	
+ 	static String runEditCustomer() {
+ 		
+ 		Scanner sc = new Scanner(System.in);
+ 		CustomerService cs = new CustomerService();
+		
+		System.out.println(header("Edit Customer"));
+		
+ 		System.out.print(field("Customer Id", 15));
+ 		int id = sc.nextInt();
+ 		sc.nextLine();
+ 		System.out.print(field("Field to edit", 15));
+ 		String fieldChoice = sc.nextLine();
+ 		System.out.print(field("New value", 15));
+ 		String newValue = sc.nextLine();
+ 		
+ 		if (fieldChoice.equals("Name")) {
+ 			cs.updateCustomerName(id, newValue);
+ 		} else if (fieldChoice.equalsIgnoreCase("Gender")) {
+ 			cs.updateCustomerGender(id, newValue);
+ 		} else if (fieldChoice.equalsIgnoreCase("Email")) {
+ 			cs.updateCustomerEmail(id, newValue);
+ 		} else if (fieldChoice.equalsIgnoreCase("Phone")) {
+ 			cs.updateCustomerPhone(id, newValue);
+ 		} else if (fieldChoice.equalsIgnoreCase("Address")) {
+ 			cs.updateCustomerAddress(id, newValue);
+ 		} else if (fieldChoice.equalsIgnoreCase("Privilege")) {
+ 			cs.updateCustomerPrivilege(id, newValue);
+ 		}
+ 		
+ 		return display(cs.viewCustomerDetails(id));
+ 		
+ 	}
 	
 	static String display (Customer customer) {
 		
